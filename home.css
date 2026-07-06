@@ -1,0 +1,203 @@
+@import url('resetcss.css');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Time New Roman';
+}
+
+body {
+    background: hsl(221, 100%, 20%);
+    background: -moz-linear-gradient(40deg, hsl(221, 100%, 20%) 0, hsl(267, 100%, 38%) 17%, hsl(288, 97%, 42%) 36%, hsl(290, 100%, 44%) 62%, hsl(351, 100%, 50%) 100%);
+    background: -webkit-linear-gradient(40deg, hsl(221, 100%, 20%) 0, hsl(267, 100%, 38%) 17%, hsl(288, 97%, 42%) 36%, hsl(290, 100%, 44%) 62%, hsl(351, 100%, 50%) 100%);
+    background: linear-gradient(40deg, hsl(221, 100%, 20%) 0, hsl(267, 100%, 38%) 17%, hsl(288, 97%, 42%) 36%, hsl(290, 100%, 44%) 62%, hsl(351, 100%, 50%) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 24px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 15px 40px hsla(0, 0%, 0%, 0.2);
+    border-radius: 25px;
+    background: hsla(280, 40%, 95%, 0.85);
+    backdrop-filter: blur(10px);
+    gap: 20px;
+}
+
+.introduction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.paragraph-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: hsl(243, 90%, 20%);
+    text-align: center;
+}
+
+.fullname_label,
+.compulsory_subject-title,
+.optional_subject1-title,
+.optional_subject2-title,
+.math_label,
+.lite_label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: hsl(270, 15%, 35%);
+    margin-bottom: 6px;
+    transform-origin: left center;
+    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.input,
+select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid hsl(270, 10%, 80%);
+    font-size: 15px;
+    outline: none;
+    background: hsl(0, 0%, 100%);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235c4d66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.compulsory_subject {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.compulsory_subject-title {
+    grid-column: span 2;
+    margin-bottom: -5px;
+}
+
+.math_input,
+.lite_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.optional_subject1,
+.optional_subject2 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.subject1,
+.subject2 {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 12px;
+}
+
+.fullname:hover .fullname_label {
+    color: hsl(0, 0%, 100%);
+    text-shadow: 0px 0px 5px hsl(243, 90%, 60%), 0px 0px 10px hsl(243, 100%, 50%);
+    transform: translateY(-4px) scale(1.06);
+}
+
+.fullname .input:hover {
+    border-color: hsl(243, 100%, 45%);
+    box-shadow: 0 4px 12px hsla(243, 100%, 40%, 0.15), 0 0 0 2px hsla(243, 100%, 60%, 0.4);
+    transform: translateY(-4px);
+}
+
+.math_input:hover .math_label,
+.lite_input:hover .lite_label {
+    color: hsl(0, 0%, 100%);
+    text-shadow: 0px 0px 5px hsl(300, 90%, 65%), 0px 0px 10px hsl(300, 100%, 55%);
+    transform: translateY(-4px) scale(1.06);
+}
+
+.compulsory_subject .input:hover {
+    border-color: hsl(300, 100%, 40%);
+    box-shadow: 0 4px 12px hsla(300, 100%, 35%, 0.15), 0 0 0 2px hsla(300, 100%, 60%, 0.4);
+    transform: translateY(-4px);
+}
+
+.optional_subject1:hover>.optional_subject1-title {
+    color: hsl(0, 0%, 100%);
+    text-shadow: 0px 0px 5px hsl(342, 90%, 65%), 0px 0px 10px hsl(342, 100%, 55%);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.subject1 select:hover,
+.subject1 .input:hover {
+    border-color: hsl(342, 100%, 45%);
+    box-shadow: 0 4px 12px hsla(342, 100%, 40%, 0.15), 0 0 0 2px hsla(342, 100%, 65%, 0.4);
+    transform: translateY(-4px);
+}
+
+.optional_subject2:hover .optional_subject2-title {
+    color: hsl(0, 0%, 100%);
+    text-shadow: 0px 0px 5px hsl(342, 90%, 65%), 0px 0px 10px hsl(342, 100%, 55%);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.subject2 select:hover,
+.subject2 .input:hover {
+    border-color: hsl(342, 100%, 45%);
+    box-shadow: 0 4px 12px hsla(342, 100%, 40%, 0.15), 0 0 0 2px hsla(342, 100%, 65%, 0.4);
+    transform: translateY(-4px);
+}
+
+.send-button {
+    align-self: center;
+    margin-top: 5px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, hsl(231, 69%, 57%), hsl(271, 62%, 40%));
+    color: hsl(0, 0%, 100%);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsla(250, 60%, 40%, 0.4);
+}
+
+.send-button:active {
+    transform: scale(0.98);
+}
+
+@media (min-width: 300px) {
+    .paragraph-title {
+        font-size: 1.25rem;
+    }
+}

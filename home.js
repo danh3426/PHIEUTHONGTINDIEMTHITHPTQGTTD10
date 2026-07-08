@@ -1,3 +1,10 @@
+// Chọn tất cả các ô nhập điểm dựa trên class 'input_mark'
+const markInputs = document.querySelectorAll(".input_mark");
+
+markInputs.forEach((input) => {
+  input.addEventListener("blur", function () {});
+});
+
 document.getElementById("form").addEventListener("submit", function (e) {
   // 1. Ngăn chặn form tải lại trang mặc định
   e.preventDefault();

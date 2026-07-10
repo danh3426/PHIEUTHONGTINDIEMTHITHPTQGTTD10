@@ -26,7 +26,7 @@ mark.forEach(function (input) {
     if (value.length > 1) {
       value = value.charAt(0) + "." + value.substring(1);
     }
-    if (parseFloat(value) > 10) {
+    if (parseFloat(value) >= 10) {
       value = "10";
     }
     input.value = value;

@@ -135,9 +135,9 @@ function send(e) {
       name: name.value.trim(),
       math: math.value,
       lite: lite.value,
-      optional_subject1_name: optional_subject1.value,
+      optional_subject1_name: optional1,
       optional_subject1_mark: subject1.value,
-      optional_subject2_name: optional_subject2.value,
+      optional_subject2_name: optional2,
       optional_subject2_mark: subject2.value,
     };
     fetch(

@@ -28,6 +28,7 @@ mark.forEach(function (input) {
     }
     if (parseFloat(value) >= 10) {
       value = "10";
+      return;
     }
     input.value = value;
   });

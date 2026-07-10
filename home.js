@@ -19,24 +19,31 @@ const mark = document.querySelectorAll(".input_mark");
 mark.forEach(function (input) {
   input.addEventListener("input", function (e) {
     let value = input.value;
+
     if (value.includes(".")) {
       value = value.replace(/[^0-9.]/g, "");
       let parts = value.split(".");
+
       if (parts.length > 2) {
         value = parts[0] + "." + parts.slice(1).join("");
       }
+
       if (parts[1] && parts[1].length > 2) {
         value = parts[0] + "." + parts[1].substring(0, 2);
       }
+
       if (parseFloat(value) > 10) value = "10";
+
       input.value = value;
       return;
     }
     value = value.replace(/[^0-9]/g, "");
+
     if (!value) {
       input.value = "";
       return;
     }
+
     if (value.length >= 2) {
       if (value.startsWith("10")) {
         value = "10";
@@ -49,9 +56,11 @@ mark.forEach(function (input) {
         }
       }
     }
+
     if (parseFloat(value) > 10) {
       value = "10";
-    
+    }
+
     input.value = value;
   });
 });
@@ -192,6 +201,6 @@ function send(e) {
     annoucement.style.display = "block";
   }
 }
-//tắt form và hiển thị thông báo có hiệu ứng
+//tắt form và hiển thị thông báo
 const send_button = document.getElementById("send");
 send_button.addEventListener("click", send);

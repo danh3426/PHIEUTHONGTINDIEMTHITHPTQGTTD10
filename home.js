@@ -30,11 +30,6 @@ mark.forEach(function (input) {
       return;
     }
 
-    if (parseFloat(value) > 10) {
-      input.value = "10";
-      return;
-    }
-
     if (value.length > 1) {
       value = value.charAt(0) + "." + value.substring(1);
     }

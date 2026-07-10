@@ -19,17 +19,26 @@ const mark = document.querySelectorAll(".input_mark");
 mark.forEach(function (input) {
   input.addEventListener("input", function (e) {
     let value = input.value.replace(/\./g, "");
+
     if (!value) {
       input.value = "";
       return;
     }
+
+    if (value === "10") {
+      input.value = "10";
+      return;
+    }
+
+    if (parseFloat(value) > 10) {
+      input.value = "10";
+      return;
+    }
+
     if (value.length > 1) {
       value = value.charAt(0) + "." + value.substring(1);
     }
-    if (parseFloat(value) >= 10) {
-      value = "10";
-      return;
-    }
+
     input.value = value;
   });
 });

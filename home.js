@@ -176,6 +176,6 @@ function send(e) {
     annoucement.style.display = "block";
   }
 }
-//tắt form và hiển thị thông báo
+//tắt form và hiển thị thông báo có hiệu ứng
 const send_button = document.getElementById("send");
 send_button.addEventListener("click", send);

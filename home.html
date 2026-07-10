@@ -6,6 +6,9 @@
     <meta name="author" content="Huỳnh Hoàng Thanh Danh" />
     <link rel="stylesheet" href="home.css" />
     <link rel="icon" href="images/icon.png" type="image/x-icon" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+    </style>
     <title>THÔNG TIN ĐIỂM THI THPTQG</title>
   </head>
   <body>
@@ -20,14 +23,12 @@
         <p class="fullname_label">Họ và tên:</p>
         <input
           id="fullname"
-          class="input"
+          class="input input_name"
           type="text"
           maxlength="50"
           placeholder="Nhập họ và tên"
         />
-        <p class="name_alert" id="name_alert">
-          Họ tên không được chưa ký tự đặc biệt
-        </p>
+        <p class="alert" id="fullname_alert"></p>
       </div>
       <div class="compulsory_subject">
         <div class="math_input">
@@ -41,6 +42,7 @@
             placeholder="Nhập điểm"
             inputmode="numeric"
           />
+          <p class="alert" id="math_alert"></p>
         </div>
         <div class="lite_input">
           <p class="lite_label">Ngữ Văn:</p>
@@ -53,81 +55,94 @@
             placeholder="Nhập điểm"
             inputmode="numeric"
           />
+          <p class="alert" id="lite_alert"></p>
         </div>
       </div>
       <div class="optional_subject1">
         <p class="optional_subject1-title">Môn tự chọn 1:</p>
         <div class="subject1">
-          <select id="optional_subject1-select">
-            <option value="">Chọn môn</option>
-            <option value="Physic">Vật Lý</option>
-            <option value="Chemistry">Hóa học</option>
-            <option value="Biology">Sinh học</option>
-            <option value="History">Lịch sử</option>
-            <option value="Geography">Địa lý</option>
-            <option value="Economic">GDKTPL</option>
-            <option value="Technology">Tin học</option>
-            <optgroup label="Ngoại ngữ">
-              <option value="English">Tiếng Anh</option>
-              <option value="France">Tiếng Pháp</option>
-              <option value="Russia">Tiếng Nga</option>
-              <option value="China">Tiếng Trung Quốc</option>
-              <option value="Germany">Tiếng Đức</option>
-              <option value="Japan">Tiếng Nhật</option>
-              <option value="Korean">Tiếng Hàn</option>
-            </optgroup>
-            <option value="Industry">Công nghệ công nghiệp</option>
-            <option value="Agriculture">Công nghệ nông nghiệp</option>
-          </select>
-          <input
-            id="subject1"
-            class="input input_mark"
-            type="text"
-            min="0"
-            max="10"
-            placeholder="Môn tự chọn 1"
-            inputmode="numeric"
-          />
+          <div class="subject1_box">
+            <select id="optional_subject1-select">
+              <option value="">Chọn môn</option>
+              <option value="Physic">Vật Lý</option>
+              <option value="Chemistry">Hóa học</option>
+              <option value="Biology">Sinh học</option>
+              <option value="History">Lịch sử</option>
+              <option value="Geography">Địa lý</option>
+              <option value="Economic">GDKTPL</option>
+              <option value="Technology">Tin học</option>
+              <optgroup label="Ngoại ngữ">
+                <option value="English">Tiếng Anh</option>
+                <option value="France">Tiếng Pháp</option>
+                <option value="Russia">Tiếng Nga</option>
+                <option value="China">Tiếng Trung Quốc</option>
+                <option value="Germany">Tiếng Đức</option>
+                <option value="Japan">Tiếng Nhật</option>
+                <option value="Korean">Tiếng Hàn</option>
+              </optgroup>
+              <option value="Industry">Công nghệ công nghiệp</option>
+              <option value="Agriculture">Công nghệ nông nghiệp</option>
+            </select>
+            <p class="alert" id="optional_subject1_alert"></p>
+          </div>
+          <div class="subject1_input">
+            <input
+              id="subject1"
+              class="input input_mark"
+              type="text"
+              min="0"
+              max="10"
+              placeholder="Môn tự chọn 1"
+              inputmode="numeric"
+            />
+            <p class="alert" id="subject1_alert"></p>
+          </div>
         </div>
       </div>
       <div class="optional_subject2">
         <p class="optional_subject2-title">Môn tự chọn 2:</p>
         <div class="subject2">
-          <select id="optional_subject2-select">
-            <option value="">Chọn môn</option>
-            <option value="Physic">Vật Lý</option>
-            <option value="Chemistry">Hóa học</option>
-            <option value="Biology">Sinh học</option>
-            <option value="History">Lịch sử</option>
-            <option value="Geography">Địa lý</option>
-            <option value="Economic">GDKTPL</option>
-            <option value="Technology">Tin học</option>
-            <optgroup label="Ngoại ngữ">
-              <option value="English">Tiếng Anh</option>
-              <option value="France">Tiếng Pháp</option>
-              <option value="Russia">Tiếng Nga</option>
-              <option value="China">Tiếng Trung Quốc</option>
-              <option value="Germany">Tiếng Đức</option>
-              <option value="Japan">Tiếng Nhật</option>
-              <option value="Korean">Tiếng Hàn</option>
-            </optgroup>
-            <option value="Industry">Công nghệ công nghiệp</option>
-            <option value="Agriculture">Công nghệ nông nghiệp</option>
-          </select>
-          <input
-            id="subject2"
-            class="input input_mark"
-            type="text"
-            min="0"
-            max="10"
-            placeholder="Môn tự chọn 2"
-            inputmode="numeric"
-          />
+          <div class="subject2_box">
+            <select id="optional_subject2-select">
+              <option value="">Chọn môn</option>
+              <option value="Physic">Vật Lý</option>
+              <option value="Chemistry">Hóa học</option>
+              <option value="Biology">Sinh học</option>
+              <option value="History">Lịch sử</option>
+              <option value="Geography">Địa lý</option>
+              <option value="Economic">GDKTPL</option>
+              <option value="Technology">Tin học</option>
+              <optgroup label="Ngoại ngữ">
+                <option value="English">Tiếng Anh</option>
+                <option value="France">Tiếng Pháp</option>
+                <option value="Russia">Tiếng Nga</option>
+                <option value="China">Tiếng Trung Quốc</option>
+                <option value="Germany">Tiếng Đức</option>
+                <option value="Japan">Tiếng Nhật</option>
+                <option value="Korean">Tiếng Hàn</option>
+              </optgroup>
+              <option value="Industry">Công nghệ công nghiệp</option>
+              <option value="Agriculture">Công nghệ nông nghiệp</option>
+            </select>
+            <p class="alert" id="optional_subject2_alert"></p>
+          </div>
+          <div class="subject2_input">
+            <input
+              id="subject2"
+              class="input input_mark"
+              type="text"
+              min="0"
+              max="10"
+              placeholder="Môn tự chọn 2"
+              inputmode="numeric"
+            />
+            <p class="alert" id="subject2_alert"></p>
+          </div>
         </div>
       </div>
       <button id="send" class="send-button">Gửi</button>
     </form>
-    <div class="annoucement">
+    <div id="annoucement" class="annoucement">
       <h3 class="annoucement_title">Câu trả lời của em đã được gửi đi</h3>
       <p class="annoucement_paragraph">
         Các em đã hoàn thành kỳ thi quan trọng nhất trong cuộc đời học sinh của
@@ -136,6 +151,6 @@
         con đường mà mình đã chọn
       </p>
     </div>
-    <script src="home.js" defer></script>
+    <script src="home.js"></script>
   </body>
 </html>

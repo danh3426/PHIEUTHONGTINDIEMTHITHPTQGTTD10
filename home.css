@@ -2,7 +2,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Roboto';
+    font-family: 'K2D', 'Roboto', 'sans-serif';
 }
 
 body {
@@ -15,6 +15,12 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+}
+
+.alert {
+    display: none;
+    margin-top: 5px;
+    color: hsl(0, 100%, 50%);
 }
 
 .form {
@@ -67,6 +73,7 @@ body {
 }
 
 .input,
+.input_name,
 select {
     width: 100%;
     padding: 13px;
@@ -202,32 +209,22 @@ select {
     }
 }
 
-/* Khung bọc thông báo thành công */
 .annoucement {
     display: none;
-    /* Mặc định ẩn, sẽ hiện khi JS kích hoạt */
     max-width: 550px;
     margin: 30px auto;
     padding: 35px 30px;
     background: rgba(255, 255, 255, 0.15);
-    /* Nền trắng trong suốt */
     backdrop-filter: blur(15px);
-    /* Hiệu ứng kính mờ xuyên thấu phông nền */
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    /* Viền sáng nhẹ tạo khối */
     border-radius: 20px;
-    /* Bo góc mềm mại giống hệt Form gốc */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    /* Đổ bóng tạo chiều sâu */
     text-align: center;
     color: #ffffff;
-    /* Chữ màu trắng để nổi bật trên nền tối */
     animation: fadeInUp 0.6s ease-out forwards;
-    /* Hiệu ứng mượt mà khi xuất hiện */
 }
 
-/* Tiêu đề thông báo */
 .annoucement_title {
     font-size: 24px;
     font-weight: 700;
@@ -237,20 +234,16 @@ select {
     text-transform: uppercase;
     letter-spacing: 1px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    /* Tạo hiệu ứng nổi cho tiêu đề */
 }
 
-/* Nội dung lời chúc */
 .annoucement_paragraph {
     font-size: 16px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    /* Màu trắng đục nhẹ giúp người dùng dễ đọc, đỡ mỏi mắt */
     margin: 0;
     font-weight: 400;
 }
 
-/* Thêm hiệu ứng icon check thành công (Tùy chọn tăng tính thẩm mỹ) */
 .annoucement::before {
     content: "✓";
     display: inline-block;
@@ -266,7 +259,6 @@ select {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-/* Định nghĩa hiệu ứng mượt mà khi hiện thông báo */
 @keyframes fadeInUp {
     from {
         opacity: 0;

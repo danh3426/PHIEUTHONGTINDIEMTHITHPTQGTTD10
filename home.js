@@ -1,74 +1,174 @@
-// Chọn tất cả các ô nhập điểm dựa trên class 'input_mark'
-const markInputs = document.querySelectorAll(".input_mark");
-
-markInputs.forEach((input) => {
-  input.addEventListener("blur", function () {});
+function checkName(name) {
+  return /^[\p{L}\s]+$/u.test(name);
+}
+function convertToLanguage(language) {
+  if (
+    language === "English" ||
+    language === "France" ||
+    language === "Russia" ||
+    language === "China" ||
+    language === "Germany" ||
+    language === "Japan" ||
+    language === "Korean"
+  ) {
+    return "Language";
+  } else return language;
+}
+//Tự động định dạng số khi nhập input
+const mark = document.querySelectorAll(".input_mark");
+mark.forEach(function (input) {
+  input.addEventListener("input", function (e) {
+    let value = input.value.replace(/\./g, "");
+    if (!value) {
+      input.value = "";
+      return;
+    }
+    if (value.length > 1) {
+      value = value.charAt(0) + "." + value.substring(1);
+    }
+    if (parseFloat(value) > 10) {
+      value = "10";
+    }
+    input.value = value;
+  });
 });
 
-document.getElementById("form").addEventListener("submit", function (e) {
-  // 1. Ngăn chặn form tải lại trang mặc định
+function send(e) {
   e.preventDefault();
+  let isTrue = false;
 
-  // URL Google Apps Script Web App của bạn
-  const scriptURL =
-    "https://script.google.com/macros/s/AKfycbyj6sgUKdVeZKLKjmLJzrCfM400mkS3XoF4Lx7EUlCS07_DBZ-F2D_ZMfWychQS2hos/exec";
+  const allAlerts = document.querySelectorAll(".alert");
+  allAlerts.forEach((alertBox) => {
+    alertBox.style.display = "none";
+    alertBox.textContent = "";
+  });
 
-  // 2. Thu thập dữ liệu từ các input và select
-  const fullname = document.getElementById("fullname").value.trim();
-  const math = document.getElementById("math").value.trim();
-  const lite = document.getElementById("lite").value.trim();
+  const name = document.getElementById("fullname");
+  const math = document.getElementById("math");
+  const lite = document.getElementById("lite");
+  const optional_subject1 = document.getElementById("optional_subject1-select");
+  const optional_subject2 = document.getElementById("optional_subject2-select");
+  const subject1 = document.getElementById("subject1");
+  const subject2 = document.getElementById("subject2");
 
-  const select1 = document.getElementById("optional_subject1-select");
-  const subject1_name = select1.options[select1.selectedIndex].text; // Lấy tên môn (VD: Vật Lý)
-  const subject1_mark = document.getElementById("subject1").value.trim();
+  //Điều kiện 1: Tất cả các ô không được trống
+  let condition1 = false;
+  if (
+    name.value.trim() !== "" &&
+    math.value !== "" &&
+    lite.value !== "" &&
+    optional_subject1.value !== "" &&
+    optional_subject2.value !== "" &&
+    subject1.value !== "" &&
+    subject2.value !== ""
+  )
+    condition1 = true;
+  //Điều kiện 2: 2 môn tự chọn không được giống nhau
+  let condition2 = optional_subject1.value !== optional_subject2.value;
+  //Điều kiện 3: Trong tên không được có ký tự đặc biệt hoặc số
+  let condition3 = checkName(name.value);
+  //Điều kiện 4: Chỉ được chọn một ngôn ngữ
+  let condition4 = !(
+    convertToLanguage(optional_subject1.value) === "Language" &&
+    convertToLanguage(optional_subject2.value) === "Language"
+  );
+  if (condition1 && condition2 && condition3 && condition4) isTrue = true;
 
-  const select2 = document.getElementById("optional_subject2-select");
-  const subject2_name = select2.options[select2.selectedIndex].text; // Lấy tên môn (VD: Hóa học)
-  const subject2_mark = document.getElementById("subject2").value.trim();
-
-  // 3. Kiểm tra validate cơ bản (Tùy chọn: kiểm tra xem đã nhập đủ chưa)
-  if (!fullname || !math || !lite) {
-    alert("Vui lòng nhập đầy đủ Họ tên, điểm Toán và Ngữ Văn!");
-    return;
+  //Hiển thị thông báo lỗi
+  if (!condition1) {
+    const inputList = [
+      name,
+      math,
+      lite,
+      optional_subject1,
+      optional_subject2,
+      subject1,
+      subject2,
+    ];
+    for (let i = 0; i < inputList.length; i++) {
+      const element = inputList[i];
+      const parent = element.parentElement;
+      const alert = parent.querySelector(".alert");
+      if (element.value.trim() == "") {
+        alert.style.display = "block";
+        alert.textContent = "Không được để trống";
+      }
+    }
   }
 
-  // 4. Tạo FormData để gửi lên Google Script
-  // Lưu ý: Các 'key' ở đây (như fullname, math,...) phải khớp với cách bạn bắt biến trong hàm doPost() của Google Apps Script
-  const formData = new FormData();
-  formData.append("fullname", fullname);
-  formData.append("math", math);
-  formData.append("lite", lite);
-  formData.append("subject1_name", select1.value ? subject1_name : "");
-  formData.append("subject1_mark", subject1_mark);
-  formData.append("subject2_name", select2.value ? subject2_name : "");
-  formData.append("subject2_mark", subject2_mark);
+  if (
+    !condition2 &&
+    optional_subject1.value !== "" &&
+    optional_subject2.value !== ""
+  ) {
+    const parent1 = optional_subject1.parentElement;
+    const parent2 = optional_subject2.parentElement;
+    const alert1 = parent1.querySelector(".alert");
+    const alert2 = parent2.querySelector(".alert");
+    alert1.style.display = "block";
+    alert1.textContent = "Hai môn tự chọn không được giống nhau";
+    alert2.style.display = "block";
+    alert2.textContent = "Hai môn tự chọn không được giống nhau";
+  }
 
-  // Đổi trạng thái nút gửi để tránh người dùng bấm liên tục
-  const sendButton = document.getElementById("send");
-  sendButton.disabled = true;
-  sendButton.innerText = "Đang gửi...";
+  if (!condition3 && name.value !== "") {
+    const nameParent = name.parentElement;
+    const nameAlert = nameParent.querySelector(".alert");
+    nameAlert.style.display = "block";
+    nameAlert.textContent = "Họ tên không được chưa số hay ký tự đặc biệt";
+  }
+  if (!condition4) {
+    optional_subject1.parentElement.querySelector(".alert").style.display =
+      "block";
+    optional_subject1.parentElement.querySelector(".alert").textContent =
+      "Chỉ được phép chọn 1 môn ngoại ngữ";
+    optional_subject2.parentElement.querySelector(".alert").style.display =
+      "block";
+    optional_subject2.parentElement.querySelector(".alert").textContent =
+      "Chỉ được phép chọn 1 môn ngoại ngữ";
+  }
 
-  // 5. Gửi dữ liệu bằng Fetch API
-  fetch(scriptURL, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      // 6. Xử lý sau khi gửi thành công
-      // Ẩn form đi
-      const form = document.getElementById("form");
-      form.style.display = "none";
-
-      // 2. Hiển thị khối thông báo thành công
-      const announcement = document.querySelector(".annoucement");
-      if (announcement) {
-        announcement.style.display = "block"; // Trả về block để kích hoạt animation CSS
-      }
-    })
-    .catch((error) => {
-      console.error("Lỗi khi gửi dữ liệu:", error);
-      alert("Có lỗi xảy ra, vui lòng thử lại!");
-      sendButton.disabled = false;
-      sendButton.innerText = "Gửi";
-    });
-});
+  if (isTrue) {
+    let optional1 = convertToLanguage(optional_subject1.value);
+    let optional2 = convertToLanguage(optional_subject2.value);
+    var data = {
+      name: name.value.trim(),
+      math: math.value,
+      lite: lite.value,
+      optional_subject1_name: optional_subject1.value,
+      optional_subject1_mark: subject1.value,
+      optional_subject2_name: optional_subject2.value,
+      optional_subject2_mark: subject2.value,
+    };
+    fetch(
+      "https://script.google.com/macros/s/AKfycbwmRKXA3lhaZf0WLoeEU088ZMBHwVE4LcEnfMfPNRf5EbHBMP7Xf-ZHiO3Sp-viYD8g/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      },
+    )
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status === "success") {
+          alert("Đã gửi thông tin thành công!");
+        } else {
+          alert("Có lỗi xảy ra: " + response.message);
+        }
+      })
+      .catch((err) => {
+        alert("Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại mạng!");
+        console.error(err);
+      });
+    console.log(data);
+    const form = document.getElementById("form");
+    form.style.display = "none";
+    const annoucement = document.getElementById("annoucement");
+    annoucement.style.display = "block";
+  }
+}
+//tắt form và hiển thị thông báo
+const send_button = document.getElementById("send");
+send_button.addEventListener("click", send);
